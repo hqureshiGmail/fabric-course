@@ -1,4 +1,4 @@
-# fabric-course
+# fabric-course  - EXERCISE 1
 Set up your environment by running 
 ```
 curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.3 1.4.3 0.4.15
