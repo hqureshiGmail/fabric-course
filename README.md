@@ -9,3 +9,11 @@ One by One run commands in:
 cd infra-basic-network
 ./exercise-1.sh
 ```
+
+# fabric-course  - EXERCISE 2
+
+One by One run commands in:
+```
+cd chaincode
+./exercise-2.sh
+```
