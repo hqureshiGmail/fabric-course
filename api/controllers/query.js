@@ -30,7 +30,7 @@ exports.query = function query(req, res) {
         gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = gateway.getNetwork('mychannel');
 
         // Get the contract from the network.
         const contract = network.getContract('landrec');
@@ -38,7 +38,7 @@ exports.query = function query(req, res) {
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('queryAllCars');
+        const result =  contract.evaluateTransaction('queryAllCars');
         res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
 
     } catch (error) {
