@@ -9,9 +9,6 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', 'network-connection', 'connection.json');
 
-exports.simplequery = async function query(req, res) {
-    res.send('ok dear');
-}
 
 exports.query = async function query(req, res) {
     try {
