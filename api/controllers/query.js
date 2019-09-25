@@ -9,7 +9,7 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', 'network-connection', 'connection.json');
 
-exports.query = function query(req, res) {
+exports.query = async function query(req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
@@ -18,7 +18,7 @@ exports.query = function query(req, res) {
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userExists = wallet.exists('admin');
+        const userExists = await wallet.exists('admin');
         if (!userExists) {
             console.log('An identity for the user "admin" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
@@ -27,10 +27,10 @@ exports.query = function query(req, res) {
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
-        gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
+        await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
-        const network = gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork('mychannel');
 
         // Get the contract from the network.
         const contract = network.getContract('landrec');
@@ -38,7 +38,7 @@ exports.query = function query(req, res) {
         // Evaluate the specified transaction.
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result =  contract.evaluateTransaction('queryAllCars');
+        const result = await contract.evaluateTransaction('queryAllCars');
         res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
 
     } catch (error) {
