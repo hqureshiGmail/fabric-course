@@ -9,7 +9,7 @@ const path = require('path');
 
 const ccpPath = path.resolve(__dirname, '..', 'network-connection', 'connection.json');
 
-export async function query(req, res) {
+exports.query = function query(req, res) {
     try {
 
         // Create a new file system based wallet for managing identities.
