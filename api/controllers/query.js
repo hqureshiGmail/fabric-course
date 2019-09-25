@@ -18,7 +18,7 @@ exports.query = function query(req, res) {
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the user.
-        const userExists = await wallet.exists('admin');
+        const userExists = wallet.exists('admin');
         if (!userExists) {
             console.log('An identity for the user "admin" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
@@ -27,7 +27,7 @@ exports.query = function query(req, res) {
 
         // Create a new gateway for connecting to our peer node.
         const gateway = new Gateway();
-        await gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
+        gateway.connect(ccpPath, { wallet, identity: 'admin', discovery: { enabled: true, asLocalhost: true } });
 
         // Get the network (channel) our contract is deployed to.
         const network = await gateway.getNetwork('mychannel');
