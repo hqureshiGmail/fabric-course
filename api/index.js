@@ -5,6 +5,6 @@ const port = 3000
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.get('/query', async (req, res) => query.query)
+app.get('/query', async (req, res) => query.simplequery)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
