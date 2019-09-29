@@ -1,12 +1,19 @@
+
+
+
 # fabric-course  - EXERCISE 1
-Set up your environment by running 
+Set up your environment by running the bc-dev-env container
 ```
-curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.3 1.4.3 0.4.15
+cd /home/huma
+git clone -b containerized https://github.com/hqureshiGmail/fabric-course.git
+cd educative
+docker-compose build
+docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /home/huma:/home/huma educative_bc-dev-env /bin/bash
 ```
 
 One by One run commands in:
 ```
-cd infra-basic-network
+cd /home/huma/fabric-course/infra-basic-network
 ./exercise-1.sh
 ```
 
@@ -16,4 +23,13 @@ One by One run commands in:
 ```
 cd chaincode
 ./exercise-2.sh
+```
+
+# fabric-couse - EXERCISE 3
+```
+cd api
+docker-compose up
+hit url: {HOST}/query
+hit url: {HOST}/invoke
+hit url: {HOST}/query
 ```
