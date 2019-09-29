@@ -11,7 +11,7 @@ services:
     build: 
       context: .
       dockerfile: dockerfile
-    command: 'node index.js'
+    command: 'node ./src/index.js'
     volumes:
       - /home/huma/fabric-course/api:/usr/src/app
     ports:
