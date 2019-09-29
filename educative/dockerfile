@@ -12,7 +12,6 @@ RUN sudo apt-get install -y golang
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN sudo npm install npm@5.6.0 -g 
-RUN sudo usermod -a -G docker $USER
 
 CMD curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.3 1.4.3 0.4.15 -s
 
