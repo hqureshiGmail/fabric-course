@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 ENV hostworkdir /home/huma
-WORKDIR ${hostworkdir}   # WORKDIR /workspace
+WORKDIR ${hostworkdir}
 
 RUN apt-get update
 RUN apt-get install -y sudo
