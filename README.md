@@ -21,13 +21,13 @@ cd /home/huma/fabric-course/infra-basic-network
 
 One by One run commands in:
 ```
-cd chaincode
+cd /home/huma/fabric-course/chaincode
 ./exercise-2.sh
 ```
 
 # fabric-couse - EXERCISE 3
 ```
-cd api
+cd /home/huma/fabric-course/api
 docker-compose up
 hit url: {HOST}/query
 hit url: {HOST}/invoke
