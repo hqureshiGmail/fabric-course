@@ -1,0 +1,17 @@
+version: '2'
+
+networks:
+  fabric:
+
+services:
+  bc-dev-env:
+    container_name: bc-dev-env
+    build: 
+      context: .
+      dockerfile: dockerfile
+    command: 'echo runInteractive'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/huma:/home/huma
+    networks:
+      - fabric
