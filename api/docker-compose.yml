@@ -13,7 +13,7 @@ services:
       dockerfile: dockerfile
     command: 'node index.js'
     volumes:
-      - .:/usr/src/app
+      - ${PWD}:/usr/src/app
     ports:
       - 80:3000
     networks:
