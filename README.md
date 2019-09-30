@@ -5,8 +5,8 @@
 Set up your environment by running the bc-dev-env container
 ```
 cd /home/huma
-git clone -b containerized https://github.com/hqureshiGmail/fabric-course.git
-cd educative
+git clone -b improvedsetup https://github.com/hqureshiGmail/fabric-course.git
+cd /home/huma/fabric-course/educative
 docker-compose build
 docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v /home/huma:/home/huma educative_bc-dev-env /bin/bash
 ```
