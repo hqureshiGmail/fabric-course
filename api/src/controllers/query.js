@@ -40,7 +40,10 @@ exports.query = async function query(req, res) {
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('queryAllCars');
-        res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
+        // res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(result, null, 3));
 
     } catch (error) {
         res.send(`Failed to evaluate transaction: ${error}`);
