@@ -10,7 +10,7 @@ networks:
 
 services:
   ca.example.com:
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:1.4.3
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca.example.com
@@ -26,7 +26,7 @@ services:
       - basic
 
   orderer.example.com:
-    container_name: orderer.example.com
+    container_name: orderer.example.com:1.4.3
     image: hyperledger/fabric-orderer
     environment:
       - FABRIC_LOGGING_SPEC=info
@@ -47,7 +47,7 @@ services:
       - basic
 
   peer0.org1.example.com:
-    container_name: peer0.org1.example.com
+    container_name: peer0.org1.example.com:1.4.3
     image: hyperledger/fabric-peer
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -86,7 +86,7 @@ services:
       - basic
 
   couchdb:
-    container_name: couchdb
+    container_name: couchdb:0.4.15
     image: hyperledger/fabric-couchdb
     # Populate the COUCHDB_USER and COUCHDB_PASSWORD to set an admin user and password
     # for CouchDB.  This will prevent CouchDB from operating in an "Admin Party" mode.
