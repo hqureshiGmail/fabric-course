@@ -43,7 +43,7 @@ exports.query = async function query(req, res) {
         // res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
         
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(result, null, 3));
+        res.end(JSON.stringify(JSON.parse(result.toString()), null, 3));
 
     } catch (error) {
         res.send(`Failed to evaluate transaction: ${error}`);
