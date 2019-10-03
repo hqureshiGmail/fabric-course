@@ -1,7 +1,3 @@
-/*
- * SPDX-License-Identifier: Apache-2.0
- */
-
 'use strict';
 
 const { Contract } = require('fabric-contract-api');
@@ -10,62 +6,58 @@ class LandRec extends Contract {
 
     async initLedger(ctx) {
         console.info('============= START : Initialize Ledger ===========');
-        const cars = [
+        const lands = [
             {
-                color: 'blue',
-                make: 'Toyota',
-                model: 'Prius',
-                owner: 'Tomoko',
+                address: '1434 45th St E, Redmond WA, 98052',
+                location: [{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}],
+                owner: 'John',
             },
             {
-                color: 'red',
-                make: 'Ford',
-                model: 'Mustang',
-                owner: 'Brad',
+                address: '1435 45th St E, Redmond WA, 98052',
+                location: [{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}],
+                owner: 'Jane',
             },
             {
-                color: 'green',
-                make: 'Hyundai',
-                model: 'Tucson',
-                owner: 'Jin Soo',
+                address: '1437 45th St E, Redmond WA, 98052',
+                location: [{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}],
+                owner: 'Huma',
             },
         ];
 
-        for (let i = 0; i < cars.length; i++) {
-            cars[i].docType = 'car';
-            await ctx.stub.putState('CAR' + i, Buffer.from(JSON.stringify(cars[i])));
-            console.info('Added <--> ', cars[i]);
+        for (let i = 0; i < lands.length; i++) {
+            lands[i].docType = 'land';
+            await ctx.stub.putState('LAND' + i, Buffer.from(JSON.stringify(lands[i])));
+            console.info('Added <--> ', lands[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
 
-    async queryCar(ctx, carNumber) {
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+    async queryLand(ctx, landNumber) {
+        const landAsBytes = await ctx.stub.getState(landNumber); // get the land from chaincode state
+        if (!landAsBytes || landAsBytes.length === 0) {
+            throw new Error(`${landNumber} does not exist`);
         }
-        console.log(carAsBytes.toString());
-        return carAsBytes.toString();
+        console.log(landAsBytes.toString());
+        return landAsBytes.toString();
     }
 
-    async createCar(ctx, carNumber, make, model, color, owner) {
-        console.info('============= START : Create Car ===========');
+    async createLand(ctx, landNumber, address, location, owner) {
+        console.info('============= START : Create Land ===========');
 
-        const car = {
-            color,
-            docType: 'car',
-            make,
-            model,
+        const land = {
+            docType: 'land',
+            address,
+            location,
             owner,
         };
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : Create Car ===========');
+        await ctx.stub.putState(landNumber, Buffer.from(JSON.stringify(land)));
+        console.info('============= END : Create Land ===========');
     }
 
-    async queryAllCars(ctx) {
-        const startKey = 'CAR0';
-        const endKey = 'CAR999';
+    async queryAllLands(ctx) {
+        const startKey = 'LAND0';
+        const endKey = 'LAND999';
 
         const iterator = await ctx.stub.getStateByRange(startKey, endKey);
 
@@ -95,18 +87,18 @@ class LandRec extends Contract {
         }
     }
 
-    async changeCarOwner(ctx, carNumber, newOwner) {
-        console.info('============= START : changeCarOwner ===========');
+    async changeLandOwner(ctx, landNumber, newOwner) {
+        console.info('============= START : changeLandOwner ===========');
 
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
+        const landAsBytes = await ctx.stub.getState(landNumber); // get the land from chaincode state
+        if (!landAsBytes || landAsBytes.length === 0) {
+            throw new Error(`${landNumber} does not exist`);
         }
-        const car = JSON.parse(carAsBytes.toString());
-        car.owner = newOwner;
+        const land = JSON.parse(landAsBytes.toString());
+        land.owner = newOwner;
 
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : changeCarOwner ===========');
+        await ctx.stub.putState(landNumber, Buffer.from(JSON.stringify(land)));
+        console.info('============= END : changeLandOwner ===========');
     }
 
 }
