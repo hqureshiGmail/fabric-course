@@ -23,7 +23,7 @@ exports.invokecc = async function invokecc(req, res) {
         const userExists = await wallet.exists('admin');
         if (!userExists) {
             console.log('An identity for the user "admin" does not exist in the wallet');
-            console.log('Run the registerUser.js application before retrying');
+            console.log('Run the enrollAdmin.js application before retrying');
             return;
         }
 
@@ -37,13 +37,15 @@ exports.invokecc = async function invokecc(req, res) {
         // Get the contract from the network.
         const contract = network.getContract('landrec');
 
-        const result = await contract.submitTransaction('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
+        const result = await contract.submitTransaction('createLand', 'LAND12', '1434 45th St E, Redmond WA, 98052', 
+                                                        [{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}],
+                                                        'Timmy');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
         await gateway.disconnect();
 
-        res.send(`Transaction has been submitted to peer0, result is: ${result.toString()}`);
+        res.send(`Transaction has been submitted to peer0 successfully. Query to verify the new state');
 
     } catch (error) {
         res.send(`Failed to submit transaction: ${error}`);
