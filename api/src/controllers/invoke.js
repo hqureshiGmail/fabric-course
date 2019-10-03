@@ -38,14 +38,14 @@ exports.invokecc = async function invokecc(req, res) {
         const contract = network.getContract('landrec');
 
         const result = await contract.submitTransaction('createLand', 'LAND12', '1434 45th St E, Redmond WA, 98052', 
-                                                        [{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}],
+                                                        '[{lat: 3534.3, lon: 2423}, {lat: 3534.3, lon: 2341}, {lat: 3534.3, lon: 24.23}]',
                                                         'Timmy');
         console.log('Transaction has been submitted');
 
         // Disconnect from the gateway.
         await gateway.disconnect();
 
-        res.send(`Transaction has been submitted to peer0 successfully. Query to verify the new state');
+        res.send(`Transaction has been submitted to peer0 successfully. Query to verify the new state`);
 
     } catch (error) {
         res.send(`Failed to submit transaction: ${error}`);
