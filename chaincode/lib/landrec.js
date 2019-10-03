@@ -27,7 +27,7 @@ class LandRec extends Contract {
         for (let i = 0; i < lands.length; i++) {
             lands[i].docType = 'land';
             await ctx.stub.putState('LAND' + i, Buffer.from(JSON.stringify(lands[i])));
-            console.info('Added <--> ', land[i]);
+            console.info('Added <--> ', lands[i]);
         }
         console.info('============= END : Initialize Ledger ===========');
     }
