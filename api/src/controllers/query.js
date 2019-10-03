@@ -22,7 +22,7 @@ exports.query = async function query(req, res) {
         const userExists = await wallet.exists('admin');
         if (!userExists) {
             console.log('An identity for the user "admin" does not exist in the wallet');
-            console.log('Run the registerUser.js application before retrying');
+            console.log('Run the enrollAdmin.js application before retrying');
             return;
         }
 
@@ -37,9 +37,9 @@ exports.query = async function query(req, res) {
         const contract = network.getContract('landrec');
 
         // Evaluate the specified transaction.
-        // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
-        // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
-        const result = await contract.evaluateTransaction('queryAllCars');
+        // queryCar transaction - requires 1 argument, ex: ('queryLand', 'LAND4')
+        // queryAllCars transaction - requires no arguments, ex: ('queryAllLands')
+        const result = await contract.evaluateTransaction('queryAllLands');
         // res.send(`Transaction has been evaluated, result is: ${result.toString()}`);
         
         res.setHeader('Content-Type', 'application/json');
