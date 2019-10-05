@@ -1,0 +1,13 @@
+FROM ubuntu:16.04
+
+ENV hostworkdir /home/huma
+WORKDIR ${hostworkdir}
+
+RUN apt-get update
+RUN apt-get install -y sudo
+RUN sudo apt-get install -y curl
+RUN sudo apt-get install -y docker 
+RUN sudo apt-get install -y docker-compose
+
+CMD curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.3 1.4.3 0.4.15 -s
+
